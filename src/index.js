@@ -89,7 +89,7 @@ function o2o (source, destination) {
           debug('when using transform', transformName)
           // TODO use lenses here
           const rename = from => {
-            const value = transform(source[key])
+            const value = transform(from[key])
             return R.merge(from, { [destKey]: value })
           }
           renames.push(rename)
@@ -99,12 +99,6 @@ function o2o (source, destination) {
   })
 
   const transforms = [R.identity]
-  if (is.unempty(evolver)) {
-    transforms.push(R.evolve(evolver))
-  }
-  if (is.unempty(deleted)) {
-    transforms.push(R.omit(deleted))
-  }
   if (is.unempty(renames)) {
     const renameAll = source => {
       return renames.reduce((from, rename) => {
@@ -113,7 +107,14 @@ function o2o (source, destination) {
     }
     transforms.push(renameAll)
   }
+  if (is.unempty(evolver)) {
+    transforms.push(R.evolve(evolver))
+  }
+  if (is.unempty(deleted)) {
+    transforms.push(R.omit(deleted))
+  }
 
+  // console.log('transform pipe', transforms.map(t => t.name).join(' -> '))
   const transform = R.pipe.apply(null, transforms)
 
   return transform

@@ -1,16 +1,41 @@
-const o2o = require('.')
+const change = require('.')
 const is = require('check-more-types')
 const la = require('lazy-ass')
 const R = require('ramda')
 const diff = require('variable-diff')
 
 /* global describe, it */
-describe('o2o', () => {
+describe('change-by-example', () => {
   function finds (source, destination) {
-    const f = o2o(source, destination)
+    const f = change(source, destination)
     const result = f(source)
     la(R.equals(result, destination), diff(destination, result).text)
+    return f
   }
+
+  it('works on readme example', () => {
+    const source = {
+      name: 'john',
+      age: '42',
+      occupation: 'mechanic'
+    }
+    const destination = {
+      name: 'John',
+      age: 42
+    }
+    const f = finds(source, destination)
+    const newSource = {
+      name: 'mary',
+      age: '30',
+      occupation: 'engineer'
+    }
+    const output = f(newSource)
+    const expected = {
+      name: 'Mary',
+      age: 30
+    }
+    la(R.equals(output, expected), diff(expected, output).text)
+  })
 
   describe('delete property', () => {
     const source = {
@@ -26,7 +51,7 @@ describe('o2o', () => {
     }
 
     it('finds transform', () => {
-      const f = o2o(source, destination)
+      const f = change(source, destination)
       la(is.fn(f))
     })
 
@@ -193,14 +218,14 @@ describe('o2o', () => {
       describe('misc text', () => {
         const source = {
           one: '  abc  ',
-          two: '  abc  ',
+          // two: '  abc  ',
           three: 'fred, barney, &amp; pebbles',
           four: 'fred',
           five: 'fred, barney, & pebbles'
         }
         const destination = {
           one: '  abc',
-          two: 'abc  ',
+          // two: 'abc  ',
           three: 'fred, barney, & pebbles',
           four: 'Fred',
           five: ['fred', 'barney', 'pebbles']
