@@ -79,6 +79,11 @@ console.log(f({
 
 Run with environment variable `DEBUG=change-by-example ...`
 
+## Related
+
+This is much simpler problem that general value to value mapping like I
+am trying to do in [Rambo](bahmutov/rambo)
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
