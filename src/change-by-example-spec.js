@@ -1,11 +1,215 @@
-'use strict'
-
+const o2o = require('.')
+const is = require('check-more-types')
+const la = require('lazy-ass')
+const R = require('ramda')
+const diff = require('variable-diff')
 
 /* global describe, it */
-const changeByExample = require('.')
+describe('o2o', () => {
+  function finds (source, destination) {
+    const f = o2o(source, destination)
+    const result = f(source)
+    la(R.equals(result, destination), diff(destination, result).text)
+  }
 
-describe('change-by-example', () => {
-  it('write this test', () => {
-    console.assert(changeByExample, 'should export something')
+  describe('delete property', () => {
+    const source = {
+      foo: 'f',
+      bar: 'b',
+      baz: 'baz',
+      list: [1, 'foo']
+    }
+    const destination = {
+      bar: 'b',
+      baz: 'baz',
+      list: [1, 'foo']
+    }
+
+    it('finds transform', () => {
+      const f = o2o(source, destination)
+      la(is.fn(f))
+    })
+
+    it('transform works', () => {
+      finds(source, destination)
+    })
+  })
+
+  describe('rename property', () => {
+    const source = {
+      foo: 'f',
+      bar: 'b',
+      baz: 'baz'
+    }
+    const destination = {
+      BAR: 'b'
+    }
+
+    it('works', () => {
+      finds(source, destination)
+    })
+  })
+
+  describe('generate property', () => {
+    describe('strings', () => {
+      describe('trim', () => {
+        const source = {
+          text: ' f    '
+        }
+        const destination = {
+          text: 'f'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('trim with rename', () => {
+        const source = {
+          name: ' f    '
+        }
+        const destination = {
+          cleanName: 'f'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('upper case', () => {
+        const source = {
+          title: 'mr.'
+        }
+        const destination = {
+          title: 'MR.'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('lower case', () => {
+        const source = {
+          greeting: 'Hello'
+        }
+        const destination = {
+          greeting: 'hello'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('_.camelCase', () => {
+        const source = {
+          greeting: 'foo bar--baz '
+        }
+        const destination = {
+          greeting: 'fooBarBaz'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('_.deburr', () => {
+        const source = {
+          text: 'déjà vu'
+        }
+        const destination = {
+          text: 'deja vu'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('_.escape', () => {
+        const source = {
+          text: 'fred, barney, & pebbles'
+        }
+        const destination = {
+          text: 'fred, barney, &amp; pebbles'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('_.kebabCase', () => {
+        const source = {
+          one: 'Foo Bar',
+          two: 'fooBar',
+          three: '__FOO_BAR__'
+        }
+        const destination = {
+          one: 'foo-bar',
+          two: 'foo-bar',
+          three: 'foo-bar'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('_.parseInt', () => {
+        const source = {
+          age: '42'
+        }
+        const destination = {
+          age: 42
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('_.snakeCase', () => {
+        const source = {
+          one: 'Foo Bar',
+          two: 'fooBar',
+          three: '__FOO_BAR__'
+        }
+        const destination = {
+          one: 'foo_bar',
+          two: 'foo_bar',
+          three: 'foo_bar'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('misc text', () => {
+        const source = {
+          one: '  abc  ',
+          two: '  abc  ',
+          three: 'fred, barney, &amp; pebbles',
+          four: 'fred',
+          five: 'fred, barney, & pebbles'
+        }
+        const destination = {
+          one: '  abc',
+          two: 'abc  ',
+          three: 'fred, barney, & pebbles',
+          four: 'Fred',
+          five: ['fred', 'barney', 'pebbles']
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+    })
   })
 })

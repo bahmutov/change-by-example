@@ -65,6 +65,13 @@
     "unit": "mocha src/*-spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
+  "dependencies": {
+    "check-more-types": "^2.24.0",
+    "debug": "^2.6.8",
+    "lazy-ass": "^1.6.0",
+    "lodash": "^4.17.4",
+    "ramda": "^0.24.1"
+  },
   "devDependencies": {
     "ban-sensitive-files": "1.9.0",
     "dependency-check": "2.9.1",
@@ -79,7 +86,8 @@
     "prettier-standard": "6.0.0",
     "semantic-release": "6.3.6",
     "simple-commit-message": "3.2.0",
-    "standard": "10.0.2"
+    "standard": "10.0.2",
+    "variable-diff": "1.1.0"
   },
   "release": {
     "analyzeCommits": "simple-commit-message",

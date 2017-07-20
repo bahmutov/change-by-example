@@ -18,6 +18,10 @@ npm install --save change-by-example
 
 ## Use
 
+## Debugging
+
+Run with environment variable `DEBUG=change-by-example ...`
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
