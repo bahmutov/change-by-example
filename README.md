@@ -54,7 +54,7 @@ console.log(f(source))
 ```
 
 But if you give it an object of the *same shape as source*, it will transform
-it like you wanted!
+it **the same way**.
 
 ```js
 console.log(f({
