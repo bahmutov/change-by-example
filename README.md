@@ -82,7 +82,7 @@ Run with environment variable `DEBUG=change-by-example ...`
 ## Related
 
 This is much simpler problem that general value to value mapping like I
-am trying to do in [Rambo](bahmutov/rambo)
+am trying to do in [Rambo](https://github.com/bahmutov/rambo)
 
 ### Small print
 
