@@ -1,8 +1,9 @@
 const is = require('check-more-types')
 const la = require('lazy-ass')
 const R = require('ramda')
-const _ = require('lodash')
 const debug = require('debug')('change-by-example')
+
+const stringTransforms = require('./string-transforms')()
 
 function o2o (source, destination) {
   la(is.object(source), 'expected an object', source)
@@ -10,45 +11,6 @@ function o2o (source, destination) {
 
   const evolver = {}
   const deleted = []
-
-  const stringTransforms = [
-    R.trim,
-    R.toLower,
-    R.toUpper,
-    _.camelCase,
-    _.capitalize,
-    _.deburr,
-    _.escape,
-    _.kebabCase,
-    _.lowerFirst,
-    _.parseInt,
-    _.snakeCase,
-    _.startCase,
-    _.trimEnd,
-    _.trimStart,
-    _.unescape,
-    _.upperFirst,
-    _.words
-  ]
-  const stringTransformsNames = [
-    'R.trim',
-    'R.toLower',
-    'R.toUpper',
-    '_.camelCase',
-    '_.capitalize',
-    '_.deburr',
-    '_.escape',
-    '_.kebabCase',
-    '_.lowerFirst',
-    '_.parseInt',
-    '_.snakeCase',
-    '_.startCase',
-    '_.trimEnd',
-    '_.trimStart',
-    '_.unescape',
-    '_.upperFirst',
-    '_.words'
-  ]
 
   // move unchanged keys
   R.keys(source).forEach(key => {
@@ -78,18 +40,19 @@ function o2o (source, destination) {
   generatedDestinationKeys.forEach(destKey => {
     const destValue = destination[destKey]
     R.keys(source).forEach((key, index) => {
-      stringTransforms.forEach((transform, k) => {
-        if (R.equals(transform(source[key]), destValue)) {
-          const transformName = stringTransformsNames[k]
+      stringTransforms.forEach(transform => {
+        if (R.equals(transform.f(source[key]), destValue)) {
+          const transformName = transform.name
           debug(
             'source key "%s" and destination key "%s" have same value',
             key,
             destKey
           )
           debug('when using transform', transformName)
+
           // TODO use lenses here
           const rename = from => {
-            const value = transform(from[key])
+            const value = transform.f(from[key])
             return R.merge(from, { [destKey]: value })
           }
           renames.push(rename)
