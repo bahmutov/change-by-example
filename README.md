@@ -18,6 +18,63 @@ npm install --save change-by-example
 
 ## Use
 
+Imagine we have two objects: a source object and a destination object.
+If we want to transform the source into destination, we have to write the
+transform function ourselves. We could use shortcuts like
+[Ramda.evolve](http://ramdajs.com/docs/#evolve) or use one of the libs helping
+us write the tranform (like [map-factory](https://github.com/midknight41/map-factory),
+[xform](https://github.com/dvdln/xform), [mapper.js](https://github.com/Jokero/mapper.js).
+[transformo](https://github.com/lutowolk/transformo)). All this is complicated.
+
+Why can't the computer *compute* the transform that from source -> destination
+pair? Well, `change-by-example` is an attempt to do this.
+
+Give it two objects and get back and transform function
+
+```js
+const change = require('change-by-example')
+const source = {
+  name: 'john',
+  age: '42',
+  occupation: 'mechanic'
+}
+const destination = {
+  name: 'John',
+  age: 42
+}
+const f = change(source, destination)
+```
+
+If you call this transform function with original source object, you get
+back destination again
+
+```js
+console.log(f(source))
+// {name: "John", age: 42}
+```
+
+But if you give it an object of the *same shape as source*, it will transform
+it like you wanted!
+
+```js
+console.log(f({
+  name: 'mary',
+  age: '30',
+  occupation: 'engineer'
+}))
+// {name: 'Mary', age: 30}
+```
+
+## Supported
+
+* [x] property delete
+* [x] property rename
+* [x] simple string transforms from [Ramda](http://ramdajs.com/docs/)
+  and [Lodash](https://lodash.com/docs/)
+* [ ] deep paths
+* [ ] compound transforms like `trim + toLower`
+* [ ] combining values like `.fullName = .first` + `.last`
+
 ## Debugging
 
 Run with environment variable `DEBUG=change-by-example ...`
