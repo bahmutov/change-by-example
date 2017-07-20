@@ -40,7 +40,7 @@ function o2o (source, destination) {
   generatedDestinationKeys.forEach(destKey => {
     const destValue = destination[destKey]
     R.keys(source).forEach((key, index) => {
-      stringTransforms.forEach(transform => {
+      stringTransforms.some(transform => {
         if (R.equals(transform.f(source[key]), destValue)) {
           const transformName = transform.name
           debug(
