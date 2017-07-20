@@ -43,11 +43,20 @@ function o2o (source, destination) {
       stringTransforms.some(transform => {
         if (R.equals(transform.f(source[key]), destValue)) {
           const transformName = transform.name
-          debug(
-            'source key "%s" and destination key "%s" have same value',
-            key,
-            destKey
-          )
+          if (typeof destValue === 'string') {
+            debug(
+              'source key "%s" and destination key "%s" have same value "%s"',
+              key,
+              destKey,
+              destValue
+            )
+          } else {
+            debug(
+              'source key "%s" and destination key "%s" have same value',
+              key,
+              destKey
+            )
+          }
           debug('when using transform', transformName)
 
           // TODO use lenses here
@@ -56,6 +65,7 @@ function o2o (source, destination) {
             return R.merge(from, { [destKey]: value })
           }
           renames.push(rename)
+          return true
         }
       })
     })

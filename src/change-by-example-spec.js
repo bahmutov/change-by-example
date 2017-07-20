@@ -129,6 +129,43 @@ describe('change-by-example', () => {
         })
       })
 
+      describe('_.trimEnd', () => {
+        const source = {
+          greeting: 'Hello    '
+        }
+        const destination = {
+          greeting: 'Hello'
+        }
+
+        it('works', () => {
+          finds(source, destination)
+        })
+      })
+
+      describe('_.trimStart', () => {
+        it('works', () => {
+          const source = {
+            greeting: '    hello there '
+          }
+          const destination = {
+            greeting: 'hello there '
+          }
+          finds(source, destination)
+        })
+
+        it('works with several fields', () => {
+          const source = {
+            greeting: '    hello there ',
+            bye: ' good bye '
+          }
+          const destination = {
+            greeting: 'hello there ',
+            bye: 'good bye '
+          }
+          finds(source, destination)
+        })
+      })
+
       describe('_.camelCase', () => {
         const source = {
           greeting: 'foo bar--baz '
