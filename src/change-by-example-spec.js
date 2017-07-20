@@ -253,22 +253,45 @@ describe('change-by-example', () => {
       })
 
       describe('misc text', () => {
-        const source = {
-          one: '  abc  ',
-          // two: '  abc  ',
-          three: 'fred, barney, &amp; pebbles',
-          four: 'fred',
-          five: 'fred, barney, & pebbles'
-        }
-        const destination = {
-          one: '  abc',
-          // two: 'abc  ',
-          three: 'fred, barney, & pebbles',
-          four: 'Fred',
-          five: ['fred', 'barney', 'pebbles']
-        }
+        it('works for several fields', () => {
+          const source = {
+            one: '  abc  ',
+            two: '  abc  ',
+            three: 'fred, barney, &amp; pebbles',
+            four: 'fred',
+            five: 'fred, barney, & pebbles'
+          }
+          const destination = {
+            one: '  abc',
+            two: 'abc  ',
+            three: 'fred, barney, & pebbles',
+            four: 'Fred',
+            five: ['fred', 'barney', 'pebbles']
+          }
+          finds(source, destination)
+        })
 
-        it('works', () => {
+        it('works for two fields', () => {
+          const source = {
+            one: 'abc',
+            two: '  abc  '
+          }
+          const destination = {
+            one: 'abc',
+            two: 'abc  '
+          }
+          finds(source, destination)
+        })
+
+        it('works for few fields', () => {
+          const source = {
+            one: '  abc  ',
+            two: '  abc  '
+          }
+          const destination = {
+            one: '  abc',
+            two: 'abc  '
+          }
           finds(source, destination)
         })
       })

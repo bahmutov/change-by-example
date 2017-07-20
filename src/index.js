@@ -39,25 +39,21 @@ function o2o (source, destination) {
   const renames = []
   generatedDestinationKeys.forEach(destKey => {
     const destValue = destination[destKey]
-    R.keys(source).forEach((key, index) => {
-      stringTransforms.some(transform => {
+    R.keys(source).some((key, index) => {
+      return stringTransforms.some(transform => {
         if (R.equals(transform.f(source[key]), destValue)) {
           const transformName = transform.name
           if (typeof destValue === 'string') {
             debug(
-              'source key "%s" and destination key "%s" have same value "%s"',
+              'key "%s" -> "%s" have same value "%s"',
               key,
               destKey,
               destValue
             )
           } else {
-            debug(
-              'source key "%s" and destination key "%s" have same value',
-              key,
-              destKey
-            )
+            debug('key "%s" -> "%s" have same value', key, destKey)
           }
-          debug('when using transform', transformName)
+          debug('  when using transform', transformName)
 
           // TODO use lenses here
           const rename = from => {
