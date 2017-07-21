@@ -17,6 +17,10 @@ const transforms = otherTransforms.concat(stringTransforms)
 
 // combinations of two transforms
 const combine = (t, s) => {
+  // some edge cases
+  if (t.f === R.identity && s.f === R.identity) {
+    return t
+  }
   const combined = {
     f: R.compose(t.f, s.f),
     name: `${t.name} * ${s.name}`

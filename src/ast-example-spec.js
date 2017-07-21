@@ -20,6 +20,6 @@ describe.only('transform AST jsons', () => {
     const destination = require('./sub-a-b-ast.json')
     const f = change(source, destination)
     const out = f(source)
-    console.log(out)
+    console.log(JSON.stringify(out, null, 2))
   })
 })
