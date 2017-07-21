@@ -2,6 +2,7 @@ const R = require('ramda')
 const debug = require('debug')('change-by-example')
 const is = require('check-more-types')
 const la = require('lazy-ass')
+const diff = require('variable-diff')
 
 const stringTransforms = require('./string-transforms')()
 
@@ -79,4 +80,20 @@ function allPaths (object, previousPath = [], paths = []) {
   return paths
 }
 
-module.exports = { findTransform, allPaths }
+// good way to check if we can find transformation
+function finds (source, destination) {
+  const change = require('.')
+  const f = change(source, destination)
+  const result = f(source)
+  la(
+    R.equals(result, destination),
+    diff(destination, result).text,
+    'result',
+    result,
+    'expected',
+    destination
+  )
+  return f
+}
+
+module.exports = { findTransform, allPaths, finds }

@@ -68,7 +68,7 @@ console.log(f({
 ## Supported
 
 * [x] property delete
-* [x] property rename
+* [x] property rename [spec](src/property-rename-spec.js)
 * [x] simple string transforms from [Ramda](http://ramdajs.com/docs/)
   and [Lodash](https://lodash.com/docs/)
 * [x] deep source paths [#3][3]

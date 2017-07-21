@@ -1,4 +1,5 @@
 const change = require('.')
+const { finds } = require('./utils')
 const is = require('check-more-types')
 const la = require('lazy-ass')
 const R = require('ramda')
@@ -6,20 +7,6 @@ const diff = require('variable-diff')
 
 /* global describe, it */
 describe('change-by-example', () => {
-  function finds (source, destination) {
-    const f = change(source, destination)
-    const result = f(source)
-    la(
-      R.equals(result, destination),
-      diff(destination, result).text,
-      'result',
-      result,
-      'expected',
-      destination
-    )
-    return f
-  }
-
   it('works on readme example', () => {
     const source = {
       name: 'john',

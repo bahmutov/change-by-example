@@ -71,7 +71,8 @@
     "lazy-ass": "^1.6.0",
     "lodash": "^4.17.4",
     "pluralize": "6.0.0",
-    "ramda": "^0.24.1"
+    "ramda": "^0.24.1",
+    "variable-diff": "1.1.0"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.0",
@@ -88,8 +89,7 @@
     "semantic-release": "6.3.6",
     "simple-commit-message": "3.2.0",
     "snap-shot": "2.17.0",
-    "standard": "10.0.2",
-    "variable-diff": "1.1.0"
+    "standard": "10.0.2"
   },
   "release": {
     "analyzeCommits": "simple-commit-message",
