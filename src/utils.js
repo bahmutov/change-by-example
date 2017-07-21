@@ -31,20 +31,32 @@ const transforms2 = R.flatten(
   transforms.map(t => transforms.map(s => combine(t, s)))
 )
 
+const wrapCustomTransforms = fns =>
+  fns.map(f => {
+    return {
+      f,
+      name: f.name
+    }
+  })
+
 // returns transform function that is Transform(get view lens)
-const findTransform = source => value => {
+const findTransform = (source, customTransforms = []) => value => {
   // given source object and desired value
   // find T and key such that T(source[sourcePath]) = value
   // where sourcePath is nested path (via lensPath)
   let sourcePath
   let transform
 
+  const allTransforms = []
+    .concat(transforms2)
+    .concat(wrapCustomTransforms(customTransforms))
+
   const paths = allPaths(source)
   la(Array.isArray(paths), 'could not compute list of paths from', source)
 
   paths.some(path => {
     const sourceValue = R.view(R.lensPath(path), source)
-    const foundTransform = transforms2.some(t => {
+    const foundTransform = allTransforms.some(t => {
       try {
         const out = t.f(sourceValue)
         if (R.equals(value, out)) {
@@ -92,9 +104,9 @@ function allPaths (object, previousPath = [], paths = []) {
 }
 
 // good way to check if we can find transformation
-function finds (source, destination) {
+function finds (source, destination, options) {
   const change = require('.')
-  const f = change(source, destination)
+  const f = change(source, destination, options)
   const result = f(source)
   la(
     R.equals(result, destination),

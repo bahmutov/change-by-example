@@ -65,6 +65,11 @@ console.log(f({
 // {name: 'Mary', age: 30}
 ```
 
+## Advanced
+
+You can nest source and destination objects and even pass additional
+unary value transform functions to try. See [spec](src/custom-transforms-spec.js).
+
 ## Supported
 
 * [x] property delete [spec](src/property-delete-spec.js)
@@ -75,12 +80,14 @@ console.log(f({
 * [x] deep destination paths [#7][7]
 * [x] compound transforms like `trim + toLower` [#8][8]
 * [x] extracting from arrays [#9][9] [spec](src/array-spec.js)
+* [x] passing custom transforms to use [#10][10] [spec](src/custom-transforms-spec.js)
 * [ ] combining values like `.fullName = .first` + `.last`
 
 [3]: https://github.com/bahmutov/change-by-example/issues/3
 [7]: https://github.com/bahmutov/change-by-example/issues/7
 [8]: https://github.com/bahmutov/change-by-example/issues/8
 [9]: https://github.com/bahmutov/change-by-example/issues/9
+[10]: https://github.com/bahmutov/change-by-example/issues/10
 
 ## Debugging
 

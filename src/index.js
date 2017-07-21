@@ -5,11 +5,15 @@ const debug = require('debug')('change-by-example')
 const pluralize = require('pluralize')
 const { allPaths, findTransform } = require('./utils')
 
-function o2o (source, destination) {
+function o2o (source, destination, options = {}) {
   la(is.object(source), 'expected an object', source)
   la(is.object(destination), 'expected an object', destination)
 
-  const findTransformTo = findTransform(source)
+  const customTransforms = Array.isArray(options.transforms)
+    ? options.transforms
+    : []
+
+  const findTransformTo = findTransform(source, customTransforms)
 
   // look at each destination property
   const destinationPropertyTransforms = []
