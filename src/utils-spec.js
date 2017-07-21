@@ -5,7 +5,7 @@ const la = require('lazy-ass')
 
 /* global describe, it */
 describe('utils', () => {
-  describe.only('allPaths', () => {
+  describe('allPaths', () => {
     const { allPaths } = require('./utils')
 
     it('is a function', () => {

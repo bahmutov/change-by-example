@@ -71,7 +71,8 @@ console.log(f({
 * [x] property rename
 * [x] simple string transforms from [Ramda](http://ramdajs.com/docs/)
   and [Lodash](https://lodash.com/docs/)
-* [ ] deep paths
+* [x] deep source paths #3
+* [ ] deep destination paths #7
 * [ ] compound transforms like `trim + toLower`
 * [ ] combining values like `.fullName = .first` + `.last`
 

@@ -1,6 +1,7 @@
 const R = require('ramda')
 const debug = require('debug')('change-by-example')
 const is = require('check-more-types')
+const la = require('lazy-ass')
 
 const stringTransforms = require('./string-transforms')()
 
@@ -16,17 +17,22 @@ const transforms = otherTransforms.concat(stringTransforms)
 // returns transform function that is Transform(get view lens)
 const findTransform = source => value => {
   // given source object and desired value
-  // find T and key such that T(source[key]) = value
-  let sourceKey
+  // find T and key such that T(source[sourcePath]) = value
+  // where sourcePath is nested path (via lensPath)
+  let sourcePath
   let transform
 
-  R.keys(source).some(key => {
-    const sourceValue = source[key]
+  const paths = allPaths(source)
+  la(Array.isArray(paths), 'could not compute list of paths from', source)
+
+  // R.keys(source).some(key => {
+  paths.some(path => {
+    const sourceValue = R.view(R.lensPath(path), source)
     const foundTransform = transforms.some(t => {
       try {
         const out = t.f(sourceValue)
         if (R.equals(value, out)) {
-          sourceKey = key
+          sourcePath = path
           transform = t
           return true
         }
@@ -35,16 +41,11 @@ const findTransform = source => value => {
     return foundTransform
   })
 
-  if (sourceKey && transform) {
-    debug(
-      '%s( %s:%s ) -> %s',
-      transform.name,
-      sourceKey,
-      source[sourceKey],
-      value
-    )
+  if (sourcePath && transform) {
+    const sourceValue = R.view(R.lensPath(sourcePath), source)
+    debug('%s( [%s]:%s ) -> %s', transform.name, sourcePath, sourceValue, value)
 
-    const read = R.view(R.lensProp(sourceKey))
+    const read = R.view(R.lensPath(sourcePath))
     const change = R.compose(transform.f, read)
     return change
   }
