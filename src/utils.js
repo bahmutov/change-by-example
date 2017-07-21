@@ -1,5 +1,6 @@
 const R = require('ramda')
 const debug = require('debug')('change-by-example')
+const is = require('check-more-types')
 
 const stringTransforms = require('./string-transforms')()
 
@@ -49,4 +50,21 @@ const findTransform = source => value => {
   }
 }
 
-module.exports = { findTransform }
+// given an object returns list of all possible paths in it
+// allPaths({foo: {bar: 42}})
+// [['foo'], ['foo', 'bar']]
+function allPaths (object, previousPath = [], paths = []) {
+  if (!is.object(object)) {
+    return paths
+  }
+  const keys = Object.keys(object)
+
+  keys.forEach(key => {
+    const pathWithKey = [].concat(previousPath).concat(key)
+    paths.push(pathWithKey)
+    allPaths(object[key], pathWithKey, paths)
+  })
+  return paths
+}
+
+module.exports = { findTransform, allPaths }

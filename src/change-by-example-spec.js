@@ -59,7 +59,7 @@ describe('change-by-example', () => {
     finds(source, destination)
   })
 
-  it.only('works with nested objects', () => {
+  it('works with nested objects', () => {
     const source = {
       age: 42,
       name: {

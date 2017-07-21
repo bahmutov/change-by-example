@@ -1,8 +1,42 @@
 const R = require('ramda')
 const snapshot = require('snap-shot')
+const is = require('check-more-types')
+const la = require('lazy-ass')
 
 /* global describe, it */
 describe('utils', () => {
+  describe.only('allPaths', () => {
+    const { allPaths } = require('./utils')
+
+    it('is a function', () => {
+      la(is.fn(allPaths))
+    })
+
+    it('works for non-objects', () => {
+      snapshot(allPaths('foo'))
+    })
+
+    it('works for flat object', () => {
+      snapshot(allPaths({ foo: 1, bar: 2 }))
+    })
+
+    it('works for nested object', () => {
+      snapshot(allPaths({ foo: { bar: 2 } }))
+    })
+
+    it('example', () => {
+      const o = {
+        age: 21,
+        name: {
+          first: 'joe',
+          last: 'smith'
+        }
+      }
+      const paths = allPaths(o)
+      snapshot(paths)
+    })
+  })
+
   describe('lenses', () => {
     const s = {
       foo: 'bar   '

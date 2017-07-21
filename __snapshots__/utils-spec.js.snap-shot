@@ -6,3 +6,41 @@ exports['reads, transforms and sets 1'] = {
   "bar": "BAR   "
 }
 
+exports['works for non-objects 1'] = []
+
+exports['works for flat object 1'] = [
+  [
+    "foo"
+  ],
+  [
+    "bar"
+  ]
+]
+
+exports['works for nested object 1'] = [
+  [
+    "foo"
+  ],
+  [
+    "foo",
+    "bar"
+  ]
+]
+
+exports['example 1'] = [
+  [
+    "age"
+  ],
+  [
+    "name"
+  ],
+  [
+    "name",
+    "first"
+  ],
+  [
+    "name",
+    "last"
+  ]
+]
+
