@@ -1,0 +1,8 @@
+exports['reads 1'] = "bar   "
+
+exports['reads and transforms 1'] = "BAR   "
+
+exports['reads, transforms and sets 1'] = {
+  "bar": "BAR   "
+}
+

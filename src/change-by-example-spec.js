@@ -260,7 +260,7 @@ describe('change-by-example', () => {
       })
 
       describe('misc text', () => {
-        it.skip('works for several fields', () => {
+        it('works for several fields', () => {
           const source = {
             one: '  abc  ',
             two: '  abc  ',
@@ -290,7 +290,7 @@ describe('change-by-example', () => {
           finds(source, destination)
         })
 
-        it.skip('works for few fields', () => {
+        it('works for few fields', () => {
           const source = {
             one: '  abc  ',
             two: '  abc  '

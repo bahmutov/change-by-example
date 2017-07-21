@@ -70,6 +70,7 @@
     "debug": "^2.6.8",
     "lazy-ass": "^1.6.0",
     "lodash": "^4.17.4",
+    "pluralize": "6.0.0",
     "ramda": "^0.24.1"
   },
   "devDependencies": {
@@ -86,6 +87,7 @@
     "prettier-standard": "6.0.0",
     "semantic-release": "6.3.6",
     "simple-commit-message": "3.2.0",
+    "snap-shot": "2.17.0",
     "standard": "10.0.2",
     "variable-diff": "1.1.0"
   },
