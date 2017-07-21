@@ -71,10 +71,14 @@ console.log(f({
 * [x] property rename
 * [x] simple string transforms from [Ramda](http://ramdajs.com/docs/)
   and [Lodash](https://lodash.com/docs/)
-* [x] deep source paths [#3](https://github.com/bahmutov/change-by-example/issues/3)
-* [x] deep destination paths [#7](https://github.com/bahmutov/change-by-example/issues/7)
-* [ ] compound transforms like `trim + toLower`
+* [x] deep source paths [#3][3]
+* [x] deep destination paths [#7][7]
+* [x] compound transforms like `trim + toLower` [#8][8]
 * [ ] combining values like `.fullName = .first` + `.last`
+
+[3]: https://github.com/bahmutov/change-by-example/issues/3
+[7]: https://github.com/bahmutov/change-by-example/issues/7
+[8]: https://github.com/bahmutov/change-by-example/issues/8
 
 ## Debugging
 

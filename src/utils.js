@@ -14,6 +14,18 @@ const otherTransforms = [
 
 const transforms = otherTransforms.concat(stringTransforms)
 
+// combinations of two transforms
+const combine = (t, s) => {
+  const combined = {
+    f: R.compose(t.f, s.f),
+    name: `${t.name} * ${s.name}`
+  }
+  return combined
+}
+const transforms2 = R.flatten(
+  transforms.map(t => transforms.map(s => combine(t, s)))
+)
+
 // returns transform function that is Transform(get view lens)
 const findTransform = source => value => {
   // given source object and desired value
@@ -27,7 +39,7 @@ const findTransform = source => value => {
 
   paths.some(path => {
     const sourceValue = R.view(R.lensPath(path), source)
-    const foundTransform = transforms.some(t => {
+    const foundTransform = transforms2.some(t => {
       try {
         const out = t.f(sourceValue)
         if (R.equals(value, out)) {

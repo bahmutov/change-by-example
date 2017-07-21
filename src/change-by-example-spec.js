@@ -59,6 +59,16 @@ describe('change-by-example', () => {
     finds(source, destination)
   })
 
+  it('finds 2 level transforms', () => {
+    const source = {
+      name: '   joe '
+    }
+    const destination = {
+      name: 'JOE'
+    }
+    finds(source, destination)
+  })
+
   it('works with nested objects', () => {
     const source = {
       age: 42,
