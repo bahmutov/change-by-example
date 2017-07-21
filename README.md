@@ -74,11 +74,13 @@ console.log(f({
 * [x] deep source paths [#3][3]
 * [x] deep destination paths [#7][7]
 * [x] compound transforms like `trim + toLower` [#8][8]
+* [x] extracting from arrays [#9][9] [spec](src/array-spec.js)
 * [ ] combining values like `.fullName = .first` + `.last`
 
 [3]: https://github.com/bahmutov/change-by-example/issues/3
 [7]: https://github.com/bahmutov/change-by-example/issues/7
 [8]: https://github.com/bahmutov/change-by-example/issues/8
+[9]: https://github.com/bahmutov/change-by-example/issues/9
 
 ## Debugging
 
