@@ -44,6 +44,36 @@ describe('change-by-example', () => {
     la(R.equals(output, expected), diff(expected, output).text)
   })
 
+  it('should not crash on non-strings', () => {
+    const source = {
+      name: {
+        first: 'joe',
+        last: 'smith'
+      }
+    }
+    const destination = {
+      name: {
+        first: 'joe'
+      }
+    }
+    finds(source, destination)
+  })
+
+  it('works with nested objects', () => {
+    const source = {
+      age: 42,
+      name: {
+        first: 'joe',
+        last: 'smith'
+      }
+    }
+    const destination = {
+      first: 'Joe',
+      last: 'Smith'
+    }
+    finds(source, destination)
+  })
+
   describe('delete property', () => {
     const source = {
       foo: 'f',

@@ -32,12 +32,14 @@ function o2o (source, destination) {
     R.keys(source).some(key => {
       const sourceValue = source[key]
       const foundTransform = transforms.some(t => {
-        const out = t.f(sourceValue)
-        if (R.equals(value, out)) {
-          sourceKey = key
-          transform = t
-          return true
-        }
+        try {
+          const out = t.f(sourceValue)
+          if (R.equals(value, out)) {
+            sourceKey = key
+            transform = t
+            return true
+          }
+        } catch (e) {}
       })
       return foundTransform
     })
