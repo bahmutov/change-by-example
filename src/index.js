@@ -3,7 +3,7 @@ const la = require('lazy-ass')
 const R = require('ramda')
 const debug = require('debug')('change-by-example')
 const pluralize = require('pluralize')
-const { findTransform } = require('./utils')
+const { allPaths, findTransform } = require('./utils')
 
 function o2o (source, destination) {
   la(is.object(source), 'expected an object', source)
@@ -14,11 +14,14 @@ function o2o (source, destination) {
   // look at each destination property
   const destinationPropertyTransforms = []
 
-  R.keys(destination).forEach(key => {
-    const destinationValue = destination[key]
+  const paths = allPaths(destination)
+  la(Array.isArray(paths), 'could not compute list of paths from', destination)
+
+  paths.forEach(path => {
+    const destinationValue = R.view(R.lensPath(path), destination)
     const readTransform = findTransformTo(destinationValue)
     if (readTransform) {
-      const write = R.set(R.lensProp(key))
+      const write = R.set(R.lensPath(path))
       const readAndWrite = (from, to) => write(readTransform(from), to)
       destinationPropertyTransforms.push(readAndWrite)
     }

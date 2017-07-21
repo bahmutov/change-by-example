@@ -44,7 +44,7 @@ describe('change-by-example', () => {
     la(R.equals(output, expected), diff(expected, output).text)
   })
 
-  it.skip('should generate non-flat object', () => {
+  it('should generate non-flat object', () => {
     const source = {
       name: {
         first: 'joe',

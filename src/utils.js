@@ -25,7 +25,6 @@ const findTransform = source => value => {
   const paths = allPaths(source)
   la(Array.isArray(paths), 'could not compute list of paths from', source)
 
-  // R.keys(source).some(key => {
   paths.some(path => {
     const sourceValue = R.view(R.lensPath(path), source)
     const foundTransform = transforms.some(t => {
