@@ -67,10 +67,17 @@ const findTransform = source => value => {
 // allPaths({foo: {bar: 42}})
 // [['foo'], ['foo', 'bar']]
 function allPaths (object, previousPath = [], paths = []) {
-  if (!is.object(object)) {
+  let keys
+
+  if (is.object(object)) {
+    keys = Object.keys(object)
+  } else if (Array.isArray(object)) {
+    keys = R.range(0, object.length)
+  }
+
+  if (!keys) {
     return paths
   }
-  const keys = Object.keys(object)
 
   keys.forEach(key => {
     const pathWithKey = [].concat(previousPath).concat(key)

@@ -44,3 +44,13 @@ exports['example 1'] = [
   ]
 ]
 
+exports['allows arrays 1'] = [
+  [
+    0
+  ],
+  [
+    0,
+    "foo"
+  ]
+]
+

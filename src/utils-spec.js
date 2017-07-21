@@ -35,6 +35,12 @@ describe('utils', () => {
       const paths = allPaths(o)
       snapshot(paths)
     })
+
+    it('allows arrays', () => {
+      const o = [{ foo: 'bar' }]
+      const paths = allPaths(o)
+      snapshot(paths)
+    })
   })
 
   describe('lenses', () => {
@@ -71,6 +77,13 @@ describe('utils', () => {
       // write it into an empty object
       const result = set({})
       snapshot(result)
+    })
+
+    it('works with array indices', () => {
+      const list = ['foo', 'bar']
+      const read = R.view(R.lensPath(['1']))
+      const value = read(list)
+      la(value === 'bar', 'invalid value', value)
     })
   })
 })
