@@ -7,6 +7,10 @@ const diff = require('variable-diff')
 
 /* global describe, it */
 describe('change-by-example', () => {
+  it('is a function', () => {
+    la(is.fn(change))
+  })
+
   it('works on readme example', () => {
     const source = {
       name: 'john',
@@ -69,29 +73,6 @@ describe('change-by-example', () => {
       last: 'Smith'
     }
     finds(source, destination)
-  })
-
-  describe('delete property', () => {
-    const source = {
-      foo: 'f',
-      bar: 'b',
-      baz: 'baz',
-      list: [1, 'foo']
-    }
-    const destination = {
-      bar: 'b',
-      baz: 'baz',
-      list: [1, 'foo']
-    }
-
-    it('finds transform', () => {
-      const f = change(source, destination)
-      la(is.fn(f))
-    })
-
-    it('transform works', () => {
-      finds(source, destination)
-    })
   })
 
   describe('rename property', () => {
