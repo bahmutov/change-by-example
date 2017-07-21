@@ -70,6 +70,10 @@ console.log(f({
 You can nest source and destination objects and even pass additional
 unary value transform functions to try. See [spec](src/custom-transforms-spec.js).
 
+## Examples
+
+* Extracting GitHub repo information [by example](examples/github.js)
+
 ## Supported
 
 * [x] property delete [spec](src/property-delete-spec.js)
