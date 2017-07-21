@@ -15,13 +15,18 @@ const onlyInterested = {
   ssh: 'git@github.com:bahmutov/change-by-example.git'
 }
 
-// TODO should go into Applicative
+// TODO transform should go into Applicative
+
+// first extract info from first repo
 getRepoInfo('bahmutov/change-by-example')
   // returns A LOT of info!
   // see for yourself using
   // curl https://api.github.com/repos/bahmutov/change-by-example
+
+  // find transform that extracts ONLY info of interest
   .then(info => change(info, onlyInterested))
   .then(f => {
+    // fetch and extract info from SECOND repository
     return getRepoInfo('bahmutov/next-update').then(f)
   })
   .then(console.log, console.error)
