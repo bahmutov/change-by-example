@@ -84,6 +84,7 @@
     "got": "7.1.0",
     "license-checker": "13.0.2",
     "mocha": "3.4.2",
+    "next-update-travis": "1.5.2",
     "nsp": "2.6.3",
     "pre-git": "3.15.0",
     "prettier-standard": "6.0.0",
