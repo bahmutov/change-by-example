@@ -77,6 +77,7 @@ unary value transform functions to try. See [spec](src/custom-transforms-spec.js
 
 ## Supported
 
+* [ ] generates transformation function string representation [#1][1]
 * [x] property delete [spec](src/property-delete-spec.js)
 * [x] property rename [spec](src/property-rename-spec.js)
 * [x] simple string transforms from [Ramda](http://ramdajs.com/docs/)
@@ -88,6 +89,7 @@ unary value transform functions to try. See [spec](src/custom-transforms-spec.js
 * [x] passing custom transforms to use [#10][10] [spec](src/custom-transforms-spec.js)
 * [ ] combining values like `.fullName = .first` + `.last`
 
+[1]: https://github.com/bahmutov/change-by-example/issues/1
 [3]: https://github.com/bahmutov/change-by-example/issues/3
 [7]: https://github.com/bahmutov/change-by-example/issues/7
 [8]: https://github.com/bahmutov/change-by-example/issues/8

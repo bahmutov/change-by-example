@@ -1,0 +1,2 @@
+exports['has toString 1'] = "name: R.toUpper(name)"
+

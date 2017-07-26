@@ -26,8 +26,12 @@ function o2o (source, destination, options = {}) {
     const readTransform = findTransformTo(destinationValue)
     if (readTransform) {
       const write = R.set(R.lensPath(path))
-      const readAndWrite = (from, to) => write(readTransform(from), to)
-      destinationPropertyTransforms.push(readAndWrite)
+      const readAndWrite = (from, to) => write(readTransform.f(from), to)
+      const named = {
+        f: readAndWrite,
+        name: `${path}: ${readTransform.name}`
+      }
+      destinationPropertyTransforms.push(named)
     }
   })
 
@@ -39,8 +43,11 @@ function o2o (source, destination, options = {}) {
     // hmm, we can probably simplify this using merge
     const transform = from => {
       return destinationPropertyTransforms.reduce((out, t) => {
-        return t(from, out)
+        return t.f(from, out)
       }, {})
+    }
+    transform.toString = () => {
+      return destinationPropertyTransforms.map(t => t.name).join('\n')
     }
     return transform
   }

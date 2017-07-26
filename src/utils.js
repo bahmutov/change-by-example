@@ -13,8 +13,6 @@ const otherTransforms = [
   }
 ]
 
-const transforms = otherTransforms.concat(stringTransforms)
-
 // combinations of two transforms
 const combine = (t, s) => {
   const combined = {
@@ -24,8 +22,10 @@ const combine = (t, s) => {
   return combined
 }
 const transforms2 = R.flatten(
-  transforms.map(t => transforms.map(s => combine(t, s)))
+  stringTransforms.map(t => stringTransforms.map(s => combine(t, s)))
 )
+// first simple transforms, then combinations
+const transforms = otherTransforms.concat(stringTransforms).concat(transforms2)
 
 const wrapCustomTransforms = fns =>
   fns.map(f => {
@@ -44,7 +44,7 @@ const findTransform = (source, customTransforms = []) => value => {
   let transform
 
   const allTransforms = []
-    .concat(transforms2)
+    .concat(transforms)
     .concat(wrapCustomTransforms(customTransforms))
 
   const paths = allPaths(source)
@@ -71,7 +71,11 @@ const findTransform = (source, customTransforms = []) => value => {
 
     const read = R.view(R.lensPath(sourcePath))
     const change = R.compose(transform.f, read)
-    return change
+    const named = {
+      f: change,
+      name: `${transform.name}(${sourcePath})`
+    }
+    return named
   }
 }
 
