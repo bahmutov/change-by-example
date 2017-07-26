@@ -3,15 +3,78 @@ const snapshot = require('snap-shot')
 /* global describe, it */
 describe('found transform', () => {
   const change = require('.')
-  const input = {
-    name: 'foo'
-  }
-  const output = {
-    name: 'FOO'
-  }
 
   it('has toString', () => {
+    const input = {
+      name: 'foo'
+    }
+    const output = {
+      name: 'FOO'
+    }
     const t = change(input, output)
+    const text = t.toString()
+    snapshot(text)
+  })
+
+  it('two properties', () => {
+    const input = {
+      name: 'foo',
+      age: 42
+    }
+    const output = {
+      name: 'FOO',
+      age: 42
+    }
+    const t = change(input, output)
+    const text = t.toString()
+    snapshot(text)
+  })
+
+  it('nested source properties', () => {
+    const input = {
+      name: {
+        first: 'foo'
+      }
+    }
+    const output = {
+      name: 'foo'
+    }
+    const t = change(input, output)
+    const text = t.toString()
+    snapshot(text)
+  })
+
+  it('nested destination properties', () => {
+    const input = {
+      name: 'foo',
+      other: {
+        info: {
+          age: '42'
+        }
+      }
+    }
+    const output = {
+      name: {
+        first: 'foo'
+      },
+      age: 42
+    }
+    const t = change(input, output)
+    const text = t.toString()
+    snapshot(text)
+  })
+
+  it('works on readme example', () => {
+    const source = {
+      name: 'john',
+      age: '42',
+      occupation: 'mechanic'
+    }
+    const destination = {
+      name: 'John',
+      age: 42
+    }
+    const t = change(source, destination)
     const text = t.toString()
     snapshot(text)
   })

@@ -77,7 +77,7 @@ unary value transform functions to try. See [spec](src/custom-transforms-spec.js
 
 ## Supported
 
-* [ ] generates transformation function string representation [#1][1]
+* [x] generates transformation function string representation [#1][1]
 * [x] property delete [spec](src/property-delete-spec.js)
 * [x] property rename [spec](src/property-rename-spec.js)
 * [x] simple string transforms from [Ramda](http://ramdajs.com/docs/)
@@ -99,6 +99,56 @@ unary value transform functions to try. See [spec](src/custom-transforms-spec.js
 ## Debugging
 
 Run with environment variable `DEBUG=change-by-example ...`
+
+## Human text
+
+You can see the human-friendly transformation by printing the
+returned transform's function. It shows for each destination property
+the transform and the source property. For above example it would print
+
+```js
+const source = {
+  name: 'john',
+  age: '42',
+  occupation: 'mechanic'
+}
+const destination = {
+  name: 'John',
+  age: 42
+}
+const change = require('change-by-example')
+const t = change(source, destination)
+console.log(t.toString())
+/*
+name: _.capitalize(name)
+age: _.parseInt(age)
+*/
+```
+
+Similarly, deep paths will be shown using dots
+
+```js
+const input = {
+  name: 'foo',
+  other: {
+    info: {
+      age: '42'
+    }
+  }
+}
+const output = {
+  name: {
+    first: 'foo'
+  },
+  age: 42
+}
+const t = change(input, output)
+console.log(t.toString())
+/*
+name.first: R.identity(name)
+age: _.parseInt(other.info.age)
+*/
+```
 
 ## Related
 

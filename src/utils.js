@@ -73,7 +73,7 @@ const findTransform = (source, customTransforms = []) => value => {
     const change = R.compose(transform.f, read)
     const named = {
       f: change,
-      name: `${transform.name}(${sourcePath})`
+      name: `${transform.name}(${sourcePath.join('.')})`
     }
     return named
   }

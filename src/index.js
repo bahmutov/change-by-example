@@ -29,7 +29,7 @@ function o2o (source, destination, options = {}) {
       const readAndWrite = (from, to) => write(readTransform.f(from), to)
       const named = {
         f: readAndWrite,
-        name: `${path}: ${readTransform.name}`
+        name: `${path.join('.')}: ${readTransform.name}`
       }
       destinationPropertyTransforms.push(named)
     }

@@ -1,2 +1,10 @@
 exports['has toString 1'] = "name: R.toUpper(name)"
 
+exports['two properties 1'] = "name: R.toUpper(name)\nage: R.identity(age)"
+
+exports['nested source properties 1'] = "name: R.identity(name.first)"
+
+exports['nested destination properties 1'] = "name.first: R.identity(name)\nage: _.parseInt(other.info.age)"
+
+exports['works on readme example 1'] = "name: _.capitalize(name)\nage: _.parseInt(age)"
+
