@@ -1,4 +1,6 @@
 const snapshot = require('snap-shot')
+const R = require('ramda')
+const _ = require('lodash')
 
 /* global describe, it */
 describe('found transform', () => {
@@ -77,5 +79,35 @@ describe('found transform', () => {
     const t = change(source, destination)
     const text = t.toString()
     snapshot(text)
+  })
+
+  it('can eval a function', () => {
+    // for example for this transform
+    // name.first: R.identity(name)
+    // age: _.parseInt(other.info.age)
+    function f (source) {
+      return R.mergeAll([
+        R.assocPath(
+          ['name', 'first'],
+          R.identity(R.view(R.lensPath(['name']), source)),
+          {}
+        ),
+        R.assocPath(
+          ['age'],
+          _.parseInt(R.view(R.lensPath(['other', 'info', 'age']), source)),
+          {}
+        )
+      ])
+    }
+    const input = {
+      name: 'foo',
+      other: {
+        info: {
+          age: '42'
+        }
+      }
+    }
+    const output = f(input)
+    snapshot(output)
   })
 })

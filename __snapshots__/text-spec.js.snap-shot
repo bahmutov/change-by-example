@@ -8,3 +8,10 @@ exports['nested destination properties 1'] = "name.first: R.identity(name)\nage:
 
 exports['works on readme example 1'] = "name: _.capitalize(name)\nage: _.parseInt(age)"
 
+exports['can eval a function 1'] = {
+  "name": {
+    "first": "foo"
+  },
+  "age": 42
+}
+
