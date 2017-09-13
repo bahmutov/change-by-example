@@ -83,7 +83,7 @@
     "github-post-release": "1.13.1",
     "got": "7.1.0",
     "license-checker": "13.1.0",
-    "mocha": "3.5.0",
+    "mocha": "3.5.3",
     "next-update-travis": "1.7.1",
     "nsp": "2.8.0",
     "pre-git": "3.15.3",
