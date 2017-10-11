@@ -71,7 +71,7 @@
     "lazy-ass": "^1.6.0",
     "lodash": "^4.17.4",
     "pluralize": "6.0.0",
-    "ramda": "^0.24.1",
+    "ramda": "0.25.0",
     "variable-diff": "1.1.0"
   },
   "devDependencies": {
