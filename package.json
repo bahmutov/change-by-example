@@ -89,7 +89,7 @@
     "pre-git": "3.15.3",
     "prettier-standard": "6.0.0",
     "semantic-release": "6.3.6",
-    "simple-commit-message": "3.3.1",
+    "simple-commit-message": "3.3.2",
     "snap-shot": "2.17.0",
     "standard": "10.0.3"
   },
