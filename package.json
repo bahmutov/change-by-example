@@ -66,6 +66,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
+    "@bahmutov/all-paths": "1.0.1",
     "check-more-types": "^2.24.0",
     "debug": "2.6.9",
     "lazy-ass": "^1.6.0",

@@ -1,8 +1,8 @@
 const R = require('ramda')
 const debug = require('debug')('change-by-example')
-const is = require('check-more-types')
 const la = require('lazy-ass')
 const diff = require('variable-diff')
+const allPaths = require('@bahmutov/all-paths')
 
 const stringTransforms = require('./string-transforms')()
 
@@ -77,30 +77,6 @@ const findTransform = (source, customTransforms = []) => value => {
     }
     return named
   }
-}
-
-// given an object returns list of all possible paths in it
-// allPaths({foo: {bar: 42}})
-// [['foo'], ['foo', 'bar']]
-function allPaths (object, previousPath = [], paths = []) {
-  let keys
-
-  if (is.object(object)) {
-    keys = Object.keys(object)
-  } else if (Array.isArray(object)) {
-    keys = R.range(0, object.length)
-  }
-
-  if (!keys) {
-    return paths
-  }
-
-  keys.forEach(key => {
-    const pathWithKey = [].concat(previousPath).concat(key)
-    paths.push(pathWithKey)
-    allPaths(object[key], pathWithKey, paths)
-  })
-  return paths
 }
 
 // good way to check if we can find transformation
