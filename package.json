@@ -68,7 +68,7 @@
   "dependencies": {
     "@bahmutov/all-paths": "1.0.2",
     "check-more-types": "^2.24.0",
-    "debug": "2.6.9",
+    "debug": "3.1.0",
     "lazy-ass": "^1.6.0",
     "lodash": "4.17.10",
     "pluralize": "6.0.0",
