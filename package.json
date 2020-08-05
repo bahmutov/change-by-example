@@ -72,11 +72,11 @@
     "lazy-ass": "^1.6.0",
     "lodash": "4.17.19",
     "pluralize": "6.0.0",
-    "ramda": "0.27.0",
+    "ramda": "0.27.1",
     "variable-diff": "1.1.0"
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.9.7",
+    "ban-sensitive-files": "1.9.8",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
     "dont-crack": "1.2.1",
