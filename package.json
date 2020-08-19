@@ -70,13 +70,13 @@
     "check-more-types": "^2.24.0",
     "debug": "2.6.9",
     "lazy-ass": "^1.6.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.20",
     "pluralize": "6.0.0",
     "ramda": "0.27.1",
     "variable-diff": "1.1.0"
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.9.8",
+    "ban-sensitive-files": "1.9.9",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
     "dont-crack": "1.2.1",
