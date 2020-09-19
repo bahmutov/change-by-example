@@ -76,7 +76,7 @@
     "variable-diff": "1.1.0"
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.9.9",
+    "ban-sensitive-files": "1.9.10",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
     "dont-crack": "1.2.1",
