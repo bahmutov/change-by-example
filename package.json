@@ -71,7 +71,7 @@
     "debug": "2.6.9",
     "lazy-ass": "^1.6.0",
     "lodash": "4.17.21",
-    "pluralize": "6.0.0",
+    "pluralize": "8.0.0",
     "ramda": "0.27.1",
     "variable-diff": "1.1.0"
   },
