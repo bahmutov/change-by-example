@@ -92,7 +92,7 @@
     "semantic-release": "6.3.6",
     "simple-commit-message": "3.3.2",
     "snap-shot": "2.17.0",
-    "standard": "10.0.3"
+    "standard": "16.0.4"
   },
   "release": {
     "analyzeCommits": "simple-commit-message",
